@@ -35,6 +35,22 @@
 31. Contact Form
 
 ----------------------------------------------------------- */
+document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener("keydown", function (event) {
+    var key = event.key.toLowerCase();
+    var usesControl = event.ctrlKey || event.metaKey;
+    var opensDevTools = event.key === "F12" ||
+        (usesControl && event.shiftKey && ["i", "j", "c"].indexOf(key) !== -1) ||
+        (usesControl && key === "u");
+
+    if (opensDevTools) {
+        event.preventDefault();
+    }
+}, true);
+
 $(function () {
     "use strict";
     var wind = $(window);
@@ -57,28 +73,28 @@ $(function () {
     // Navbar scrolling background
     wind.on("scroll", function () {
         var bodyScroll = wind.scrollTop(),
-            navbar = $(".navbar"),
-            logo = $(".navbar .logo> img");
+            navbar = $(".navbar");
         if (bodyScroll > 100) {
             navbar.addClass("nav-scroll");
-            logo.attr('src', 'img/02.png');
         } else {
             navbar.removeClass("nav-scroll");
-            logo.attr('src', 'img/02.png');
         }
     });
    
-    // Close navbar-collapse when a clicked
-    $(".navbar-nav .dropdown-item a").on('click', function () {
-        $(".navbar-collapse").removeClass("show");
+    // Close the mobile menu after choosing a destination.
+    $(".navbar-nav .dropdown-item, .navbar-nav .nav-link:not(.dropdown-toggle)").on("click", function () {
+        if (wind.width() < 992 && $(".navbar-collapse").hasClass("show")) {
+            $(".navbar-collapse").collapse("hide");
+        }
     });
-    
-    // Close mobile menu "on click"
-    $(function () {
-        var navMain = $(".scroll-init");
-        navMain.on("click", "a", null, function () {
-            navMain.collapse('hide');
+
+    $(".booking-search").on("submit", function (event) {
+        event.preventDefault();
+        var bookingForm = $("#exampleModal .contact__form");
+        $.each($(this).serializeArray(), function () {
+            bookingForm.find('[name="' + this.name + '"]').val(this.value).trigger("change");
         });
+        bootstrap.Modal.getOrCreateInstance(document.getElementById("exampleModal")).show();
     });
     
     // Sections background image from data background
@@ -516,18 +532,21 @@ $(function () {
         $(".accordion-box").on("click", ".acc-btn", function () {
             var outerBox = $(this).parents(".accordion-box");
             var target = $(this).parents(".accordion");
-            if ($(this).next(".acc-content").is(":visible")) {
+            var content = target.children(".acc-content");
+            if (content.is(":visible")) {
                 //return false;
                 $(this).removeClass("active");
-                $(this).next(".acc-content").slideUp(300);
+                $(this).attr("aria-expanded", "false");
+                content.slideUp(300);
                 $(outerBox).children(".accordion").removeClass("active-block");
             } else {
-                $(outerBox).find(".accordion .acc-btn").removeClass("active");
+                $(outerBox).find(".accordion .acc-btn").removeClass("active").attr("aria-expanded", "false");
                 $(this).addClass("active");
+                $(this).attr("aria-expanded", "true");
                 $(outerBox).children(".accordion").removeClass("active-block");
                 $(outerBox).find(".accordion").children(".acc-content").slideUp(300);
                 target.addClass("active-block");
-                $(this).next(".acc-content").slideDown(300);
+                content.slideDown(300);
             }
         });
     }
@@ -651,7 +670,7 @@ $(function () {
     }
     // fail function
     function fail_func(data) {
-        message.fadeIn().removeClass('alert-success').addClass('alert-success');
+        message.fadeIn().removeClass('alert-success').addClass('alert-danger');
         message.text(data.responseText);
         setTimeout(function () {
             message.fadeOut();

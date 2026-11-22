@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>RENAX</title>
-    <link rel="shortcut icon" href="img/favicon.png" />
+    <title>Vehicle Details | Roadly</title>
+    <link rel="icon" type="image/svg+xml" href="img/roadly-icon.svg" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="css/plugins.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/roadly.css" />
 </head>
 <body>
     <!-- Preloader -->
@@ -29,8 +30,8 @@
         <div class="container">
             <!-- Logo -->
             <div class="logo-wrapper">
-                <a class="logo" href="index.html"> <img src="img/logo-light.png" class="logo-img" alt=""> </a>
-                <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
+                <a class="logo" href="index.html"> <img src="img/roadly-brand.svg" class="logo-img" alt="Roadly"> </a>
+
             </div>
             <!-- Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span> </button>
@@ -358,7 +359,7 @@
                                     </div>
                                     <div class="footer-contact-link-content">
                                         <h6>Write to us</h6>
-                                        <p>info@renax.com</p>
+                                        <p><a href="mailto:example@gmail.com">example@gmail.com</a></p>
                                     </div>
                                 </div>
                                 <div class="footer-contact-links-divider"></div>
@@ -382,10 +383,10 @@
                     <!-- about & social icons -->
                     <div class="col-md-4 widget-area">
                         <div class="widget clearfix">
-                            <div class="footer-logo"><img src="img/logo-light.png" alt=""></div>
-                            <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
+                            <div class="footer-logo"><img src="img/roadly-brand.svg" alt="Roadly"></div>
+
                             <div class="widget-text">
-                                <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
+                                <p>Roadly pairs a carefully selected fleet with attentive service, making every journey more considered.</p>
                                 <div class="social-icons">
                                     <ul class="list-inline">
                                         <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
@@ -428,7 +429,7 @@
             <div class="bottom-footer-text">
                 <div class="row copyright">
                     <div class="col-md-12">
-                        <p class="mb-0">&copy;2024 <a href="#">DuruThemes</a>. All rights reserved.</p>
+                        <p class="mb-0"><span>Website Showcase &copy; 2026</span><span>Designed and developed by <a href="https://orbitwick.com" target="_blank" rel="noopener noreferrer">OrbitWick</a></span></p>
                     </div>
                 </div>
             </div>
@@ -445,7 +446,8 @@
                 <div class="modal-body">
                     <div class="booking-box">
                         <div class="booking-inner clearfix">
-                            <form method="post" action="#0" class="form1 contact__form clearfix">
+                            <form method="post" action="mail.php" class="form1 contact__form clearfix">
+                                <input type="hidden" name="subject" value="Roadly rental enquiry">
                                 <!-- form message -->
                                 <div class="row">
                                     <div class="col-12">
@@ -467,7 +469,7 @@
                                         <div class="select1_wrapper">
                                             <label>Choose Car Type</label>
                                             <div class="select1_inner">
-                                                <select class="select2 select" style="width: 100%">
+                                                <select class="select2 select" style="width: 100%" name="car_type">
                                                     <option value="0">Choose Car Type</option>
                                                     <option value="1">All</option>
                                                     <option value="2">Luxury Cars</option>
@@ -482,7 +484,7 @@
                                         <div class="select1_wrapper">
                                             <label>Pick Up Location</label>
                                             <div class="select1_inner">
-                                                <select class="select2 select" style="width: 100%">
+                                                <select class="select2 select" style="width: 100%" name="pickup_location">
                                                     <option value="0">Pick Up Location</option>
                                                     <option value="1">Dubai</option>
                                                     <option value="2">Abu Dhabi</option>
@@ -496,7 +498,7 @@
                                         <div class="input1_wrapper">
                                             <label>Pick Up Date</label>
                                             <div class="input1_inner">
-                                                <input type="text" class="form-control input datepicker" placeholder="Pick Up Date" required>
+                                                <input type="text" class="form-control input datepicker" name="pickup_date" placeholder="Pick Up Date" required>
                                             </div>
                                         </div>
                                     </div>
@@ -504,7 +506,7 @@
                                         <div class="select1_wrapper">
                                             <label>Drop Off Location</label>
                                             <div class="select1_inner">
-                                                <select class="select2 select" style="width: 100%">
+                                                <select class="select2 select" style="width: 100%" name="dropoff_location">
                                                     <option value="0">Drop Off Location</option>
                                                     <option value="1">Alain</option>
                                                     <option value="2">Sharjah</option>
@@ -518,7 +520,7 @@
                                         <div class="input1_wrapper">
                                             <label>Return Date</label>
                                             <div class="input1_inner">
-                                                <input type="text" class="form-control input datepicker" placeholder="Return Date">
+                                                <input type="text" class="form-control input datepicker" name="return_date" placeholder="Return Date">
                                             </div>
                                         </div>
                                     </div>
